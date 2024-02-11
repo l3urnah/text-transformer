@@ -1,0 +1,60 @@
+import { Button, VerticalBox, LineEdit, TextEdit} from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    preferred-width: 700px;
+    preferred-height: 500px;
+    title: @tr("title bla");
+    icon: @image-url("..\\materials\\slint-logo-small-light.png");
+
+    in property <string> results: "";
+    callback action(string);
+    // make one large window that can show text and scrolls
+    GridLayout {
+        padding: 50px;
+        spacing: 25px;
+        Row {
+            Text {
+                text: "Text bla ";
+                //horizontal-alignment: center;
+                font-size: 24px;
+                font-weight: 900;
+            }
+        }
+        Row {
+            display := LineEdit { 
+                font-size: 16px;
+                //width: parent.width;
+                //height: parent.height;
+                placeholder-text: "some more text....";
+                height: 35px;
+             }
+        }
+        Row {
+            Button {
+                text: "buttonbla";
+                primary: true;
+                height: 35px;
+                clicked => {root.action(display.text)}
+            }
+        }
+        Row {
+            VerticalBox {
+                Rectangle {
+                    //height: 100px;
+                    //background: whitesmoke;
+                    TextEdit {
+                        //color: black;
+                        font-size: 16px;
+                        //font-weight: 500;
+                        width: parent.width;
+                        height: parent.height;
+                        text: root.results;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
